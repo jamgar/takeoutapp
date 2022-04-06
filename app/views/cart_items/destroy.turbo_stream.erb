@@ -1,0 +1,2 @@
+<%= turbo_stream.remove "cart_item_#{@cart_item.id}" %> 
+<%= turbo_stream.update "total", partial: "customer/total", locals: { cart: @cart } %>

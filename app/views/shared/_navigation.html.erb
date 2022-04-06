@@ -1,0 +1,12 @@
+<nav class="flex justify-between bg-gray-800 text-white py-4">
+  <span class="font-semibold px-4">
+    <%= link_to "TAKEOUT APP", root_path %>
+  </span>
+  <div class="px-4 text-gray-200">
+    <!-- links will go here -->
+    <%= link_to "Menu", customers_menu_path, class: "pr-4 hover:font-medium hover:text-white" %>
+    <%= link_to "Orders", orders_path, class: "pr-4 hover:font-medium hover:text-white" %>
+    <%= link_to "Categories", categories_path, class: "pr-4 hover:font-medium hover:text-white" %>
+    <%= link_to "Menu Items", menu_items_path, class: "pr-4 hover:font-medium hover:text-white" %>
+  </div>
+</nav>

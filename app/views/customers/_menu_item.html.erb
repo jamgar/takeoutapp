@@ -1,0 +1,16 @@
+<% category.each do |item| %>
+  <div class="flex border-b py-4 px-2 items-center">
+    <%= form_with(model: [@cart, CartItem.new]) do |form| %>
+      <div class="inline">
+        <%= form.hidden_field :menu_item_id, value: item.id %>
+        <%= form.submit "+", class: "text-xl font-bold cursor-pointer" %>
+      </div>
+    <% end %>
+
+    <div class="ml-4 flex-auto">
+      <p><%= item.name %></p>
+      <p class="text-xs text-gray-700 mt-2 px-1"><%= item.description %></p>
+    </div>
+    <p><%= number_to_currency(item.price) %></p>
+  </div>
+<% end %>

@@ -1,0 +1,53 @@
+<%= form_with(model: order, class: "contents") do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label 'Email or phone number' %>
+    <%= form.text_field :customer, required: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+<!-- Do not use: For demostration purposes to simulate a payment process -->
+  <span class="inline-block text-sm font-medium">Card Information</span>
+  <div class="mb-5">
+    <%= label_tag :card_number %>
+    <%= text_field_tag :card_number, nil, value: '4242 4242 4242 4242', disabled: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="grid grid-cols-6 gap-6">
+    <div class="col-span-6 sm:col-span-3">
+      <%= label_tag :expiration_date %>
+      <%= text_field_tag :expiration_date, nil, value: '02/30', disabled: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <div class="col-span-6 sm:col-span-3">
+      <%= label_tag :cvc %>
+      <%= text_field_tag :cvc, nil, value: '123', disabled: true, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  </div>
+<!-- end of Do not use: -->
+
+  <div class="my-5">
+    <%= form.label :total %>
+    <% if @cart.present? %>
+      <%= render "total", cart: @cart %> 
+      <%= form.hidden_field :total, value: @cart.total %>
+    <% else %>
+      <%= form.number_field :total, disabled: true, class: "block border-none outline-none px-3 py-2 mt-2 w-full" %>
+    <% end %>
+
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

@@ -1,0 +1,41 @@
+<% if notice.present? %>
+  <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<% end %>
+<div class="grid grid-cols-3 gap-4 w-full">
+  <div class="col-span-2">
+    <h1 class="font-bold text-4xl">Takeout Menu</h1>
+    <p>Start your order here</p>
+
+    <section class="mt-6">
+      <h3 class="font-semibold text-2xl text-center">Appetizers</h3>
+      <%= render 'customers/menu_item', category: @appetizers %>
+    </section>
+
+    <section class="mt-6">
+      <h3 class="font-semibold text-2xl text-center">Entrees</h3>
+      <%= render 'customers/menu_item', category: @entrees %>
+    </section>
+
+    <section class="mt-6">
+      <h3 class="font-semibold text-2xl text-center">Drinks</h3>
+      <%= render 'customers/menu_item', category: @drinks %>
+    </section>
+  </div>
+  <div>
+    <!-- cart goes here -->
+    <div class="mb-4">
+      <%= link_to "Checkout", customers_checkout_path, class: "rounded bg-blue-600 text-white py-2 px-4" %>
+    </div>
+    <div class="border rounded">
+      <h4 class="font-medium text-xl text-center py-4 border-b">Cart</h4>
+      <%= render @cart.cart_items %>
+
+      <div class="flex items-center">
+        <p class="flex-auto py-4 px-2">Total:</p>
+        <%= turbo_frame_tag "total" do %>
+          <%= render "total", cart: @cart %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
